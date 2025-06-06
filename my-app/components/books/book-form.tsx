@@ -67,7 +67,7 @@ export function BookForm({ book, onSubmit, trigger }: BookFormProps) {
         category: book.category,
       });
     }
-  },[book]);
+  },[book, reset]);
 
   const handleFormSubmit = async (data: Book) => {
     try {

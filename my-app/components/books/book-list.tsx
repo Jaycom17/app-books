@@ -38,10 +38,6 @@ export function BookList() {
   const { toast } = useToast();
 
   useEffect(() => {
-    loadBooks();
-  }, []);
-
-  useEffect(() => {
     if (successMessage) {
       const timer = setTimeout(() => setSuccessMessage(""), 3000);
       return () => clearTimeout(timer);
@@ -72,6 +68,10 @@ export function BookList() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    loadBooks();
+  }, []);
 
   const handleAddBook = async (bookData: Book) => {
     try {
