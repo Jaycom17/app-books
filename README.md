@@ -55,8 +55,8 @@ book-manager/
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/your-username/book-manager.git
-   cd book-manager
+   git git remote add origin https://github.com/Jaycom17/app-books.git
+   cd app-books
    ```
 
 2. **Set up environment variables**
@@ -170,14 +170,14 @@ The included docker-compose.yml sets up a complete local Supabase environment wi
 To stop the services:
 
 ```bash
-cd docker
+cd /docker
 docker-compose down
 ```
 
 if you want te delete the volumes:
 
 ```bash
-cd docker
+cd /docker
 docker-compose down -v
 ```
 
@@ -185,5 +185,5 @@ docker-compose down -v
 
 Juan Camilo Orejuela - juanorejuela499@gmail.com
 
-Project Link: https://github.com/your-username/book-manager
+Project Link: git remote add origin https://github.com/Jaycom17/app-books
 Live Demo: https://book-manager.vercel.app
