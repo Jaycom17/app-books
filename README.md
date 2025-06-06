@@ -26,20 +26,55 @@ A modern CRUD application for managing personal book collections, built with Nex
 
 ## 📦 Project Structure
 
-```
+```plaintext
 book-manager/
-├── my-app/ # Next.js application
-│ ├── components/ # React components
-│ ├── lib/ # Supabase client and utilities
-│ ├── app/ # Next.js app router structure
-│ ├── public/ # Static assets
-| ├── services/ # Services to connect with Supabase
-| └── utils/ # Utils for the project
-├── docker/ # Local Supabase setup
-│ ├── docker-compose.yml # Docker configuration
-│ └── seed.sql # Database seeding script
-└── README.md # Project documentation
+├── my-app/                         # Next.js frontend application
+│   ├── .env.local                  # Environment variables for local development
+│   ├── README.md                   # Frontend documentation
+│   ├── app/                        # Next.js app directory (routes, pages, layouts)
+│   ├── components/                 # Reusable React components
+│   │   ├── auth/                   # Authentication-related UI components
+│   │   ├── books/                  # Book management UI components
+│   │   └── ui/                     # Shared UI elements (buttons, modals, etc.)
+│   ├── components.json             # ShadCN UI configuration
+│   ├── eslint.config.mjs           # ESLint configuration
+│   ├── hooks/                      # Custom React hooks
+│   │   └── use-toast.tsx           # Toast notification hook
+│   ├── lib/                        # Library utilities and Supabase client
+│   │   ├── supabase.ts             # Supabase client setup
+│   │   └── utils.ts                # General utility functions
+│   ├── models/                     # TypeScript models/types
+│   │   ├── auth/                   # Auth-related types
+│   │   └── book/                   # Book-related types
+│   ├── next.config.ts              # Next.js configuration
+│   ├── package-lock.json           # npm lockfile
+│   ├── package.json                # Project dependencies and scripts
+│   ├── postcss.config.mjs          # PostCSS configuration
+│   ├── public/                     # Static assets (images, icons, etc.)
+│   ├── scripts/                    # Utility scripts (optional)
+│   ├── services/                   # API/service layer for data fetching
+│   ├── tsconfig.json               # TypeScript configuration
+│   └── utils/                      # Additional utility functions
+│     └── validateSchema.ts       # Schema validation utilities
+│ 
+├── docker/                         # Local Supabase backend setup
+│   ├── docker-compose.yml          # Docker configuration for Supabase
+│   └── seed.sql                    # Database schema and seed data
+└── README.md                       # Main project documentation
 ```
+**Main Folder Explanation:**
+
+- `my-app/`: Contains all frontend source code in Next.js, including components, hooks, utilities, and configuration.
+- `components/`: Reusable components organized by functionality (auth, books, UI).
+- `lib/`: Supabase client setup and general utilities.
+- `models/`: TypeScript types and models for the app.
+- `services/`: Logic for interacting with APIs or external services.
+- `docker/`: Configuration to run Supabase locally with Docker and database initialization scripts.
+- `public/`: Publicly accessible static files.
+- `utils/` and `hooks/`: Utility functions and custom hooks for reusable logic.
+
+This structure makes the project scalable and maintainable by clearly separating frontend logic, utilities, models, and local development environment configuration.
+
 
 ## 🚀 Getting Started
 
