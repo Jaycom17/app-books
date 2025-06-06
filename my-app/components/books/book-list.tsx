@@ -204,7 +204,7 @@ export function BookList() {
     }
   };
 
-  let filteredBooks = books.filter((book) => {
+  const filteredBooks = books.filter((book) => {
     const matchesSearch =
       book.title!.toLowerCase().includes(searchTerm.toLowerCase()) ||
       book.author!.toLowerCase().includes(searchTerm.toLowerCase());
