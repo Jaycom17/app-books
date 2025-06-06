@@ -24,10 +24,10 @@ type Category =
  * @property {Category} [category] - The category or genre of the book.
  */
 export interface Book{
-  title?: string
-  author?: string
-  year?: number
-  category?: Category
+  title: string
+  author: string
+  year: number
+  category: Category
 }
 
 /**

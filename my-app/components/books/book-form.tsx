@@ -74,8 +74,12 @@ export function BookForm({ book, onSubmit, trigger }: BookFormProps) {
       await onSubmit(data);
       reset();
       setOpen(false);
-    } catch (error) {
-      console.error("Error submitting book:", error);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Error submitting book form:", error.message);
+      } else {
+        console.error("An unexpected error occurred while submitting the book form.");
+      }
     }
   }
 

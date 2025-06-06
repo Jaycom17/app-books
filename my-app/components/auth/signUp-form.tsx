@@ -55,8 +55,12 @@ export default function SignUpForm() {
       setGeneralError("");
 
       reset();
-    } catch (error: any) {
-      setGeneralError(error.message || "An error occurred during sign up.");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setGeneralError(error.message);
+      } else {
+        setGeneralError("An unexpected error occurred. Please try again.");
+      }
     }
   };
   return (

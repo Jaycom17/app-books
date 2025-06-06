@@ -54,12 +54,20 @@ export function BookList() {
       const data = await fetchBooks();
 
       setBooks(data || []);
-    } catch (error: any) {
-      toast({
-        title: "Error",
-        description: "Failed to fetch books",
-        variant: "destructive",
-      });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: "An unexpected error occurred. Please try again.",
+          variant: "destructive",
+        });
+      }
     } finally {
       setLoading(false);
     }
@@ -78,12 +86,20 @@ export function BookList() {
 
       setSuccessMessage("Book added successfully");
       loadBooks();
-    } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error.message,
-        variant: "destructive",
-      });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: "An unexpected error occurred. Please try again.",
+          variant: "destructive",
+        });
+      }
     }
   };
 
@@ -93,12 +109,20 @@ export function BookList() {
 
       setSuccessMessage("Book updated successfully");
       loadBooks();
-    } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error.message,
-        variant: "destructive",
-      });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: "An unexpected error occurred. Please try again.",
+          variant: "destructive",
+        });
+      }
     }
   };
 
@@ -111,24 +135,40 @@ export function BookList() {
       setSuccessMessage("Book deleted successfully");
 
       loadBooks();
-    } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error.message,
-        variant: "destructive",
-      });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: "An unexpected error occurred. Please try again.",
+          variant: "destructive",
+        });
+      }
     }
   };
 
   const handleSignOut = async () => {
     try {
       await signOut();
-    } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error.message,
-        variant: "destructive",
-      });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: "An unexpected error occurred. Please try again.",
+          variant: "destructive",
+        });
+      }
     }
   };
 
@@ -147,12 +187,20 @@ export function BookList() {
       await changePassword(data.newPassword!);
 
       setSuccessMessage("Password changed successfully");
-    } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error.message,
-        variant: "destructive",
-      });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: "An unexpected error occurred. Please try again.",
+          variant: "destructive",
+        });
+      }
     }
   };
 

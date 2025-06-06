@@ -1,13 +1,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Book, BookResponse } from "@/models/book/bookModels";
+import { BookResponse } from "@/models/book/bookModels";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 
 /**
  * Item component for displaying a book with its details and actions.
- * @param { book, onDelete, children } - The book object to display, a function to call when the delete button is clicked, and optional children elements. 
- * @returns 
+ * @param { book, onDelete, children } - The book object to display, a function to call when the delete button is clicked, and optional children elements.
+ * @returns
  */
 export default function BookItem({
   book,
@@ -16,7 +16,7 @@ export default function BookItem({
 }: {
   book: BookResponse;
   onDelete: (id: string) => void;
-    children?: React.ReactNode;
+  children?: React.ReactNode;
 }) {
   return (
     <Card key={book.id}>

@@ -1,7 +1,5 @@
 "use client";
 
-import { changePassword } from "@/services/auth";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { ChangePasswordData } from "@/models/auth/authModels";
@@ -56,8 +54,13 @@ export function ChangePassword({ trigger, onSubmit }: { trigger?: React.ReactNod
         onSubmit(data);
       reset();
       setOpen(false);
-    } catch (error: any) {
-      setGeneralError(error.message || "An error occurred during sign up.");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setGeneralError(error.message);
+      } else {
+        setGeneralError("An unexpected error occurred.");
+      }
+      console.error("Error changing password:", error);
     }
   };
 

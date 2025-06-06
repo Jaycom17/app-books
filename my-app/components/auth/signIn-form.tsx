@@ -43,8 +43,12 @@ export default function SignInForm() {
     try {
       await signIn(data.email!, data.password!);
       reset();
-    } catch (error: any) {
-      setGeneralError(error.message || "An error occurred during sign in.");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setGeneralError(error.message);
+      } else {
+        setGeneralError("An unexpected error occurred. Please try again.");
+      }
     }
   };
   return (

@@ -6,9 +6,9 @@
  * @property {string} [confirmPassword] - Confirmation of the user's password.
  */
 export interface SignUpData {
-    email?: string;
-    password?: string;
-    confirmPassword?: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
 }
 
 /**
@@ -17,8 +17,8 @@ export interface SignUpData {
  * @property {string} [password] - The user's password.
  */
 export interface SignInData {
-    email?: string;
-    password?: string;
+    email: string;
+    password: string;
 }
 
 /**
@@ -27,6 +27,6 @@ export interface SignInData {
  * @property {string} [confirmNewPassword] - Confirmation of the new password.
  */
 export interface ChangePasswordData {
-    newPassword?: string;
-    confirmNewPassword?: string;
+    newPassword: string;
+    confirmNewPassword: string;
 }
