@@ -104,7 +104,7 @@ You can run this project without modifying any .env files, as it uses the defaul
 
 3. **Start Supabase locally with Docker**
 
-The container setup and Docker configuration are based on the Supabase self-hosting documentation, with some modifications to automatically load the database structure (seed.sql) during initialization.
+The container setup and Docker configuration are based on the Supabase self-hosting documentation [here](https://supabase.com/docs/guides/self-hosting/docker), with some modifications to automatically load the database structure (seed.sql) during initialization.
 
 The .env file has been adjusted to disable email verification in the local environment, simplifying the registration process for development purposes.
 
@@ -222,4 +222,4 @@ Juan Camilo Orejuela - juanorejuela499@gmail.com
 
 Project Link: git remote add origin https://github.com/Jaycom17/app-books
 
-Live Demo: https://book-manager.vercel.app
+Live Demo: https://app-books-theta.vercel.app/

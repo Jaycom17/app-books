@@ -204,24 +204,25 @@ export function BookList() {
     }
   };
 
-  const filteredBooks = books.filter((book) => {
+  let filteredBooks = books.filter((book) => {
     const matchesSearch =
       book.title!.toLowerCase().includes(searchTerm.toLowerCase()) ||
       book.author!.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory =
       categoryFilter === "all" || book.category === categoryFilter;
-    
-    if (orderBy === "title") {
-      books.sort((a, b) => a.title!.localeCompare(b.title!));
-    }
-    if (orderBy === "author") {
-      books.sort((a, b) => a.author!.localeCompare(b.author!));
-    }
-    if (orderBy === "year") {
-      books.sort((a, b) => a.year! - b.year!);
-    }
+
     return matchesSearch && matchesCategory;
   });
+
+  if (orderBy === "title") {
+    filteredBooks.sort((a, b) => a.title!.localeCompare(b.title!));
+  }
+  if (orderBy === "author") {
+    filteredBooks.sort((a, b) => a.author!.localeCompare(b.author!));
+  }
+  if (orderBy === "year") {
+    filteredBooks.sort((a, b) => a.year! - b.year!);
+  }
 
   const categories = [...new Set(books.map((book) => book.category))];
 
@@ -273,7 +274,7 @@ export function BookList() {
       </div>
 
       <div className="flex justify-start mb-4">
-          <Select value={orderBy} onValueChange={setOrderBy}>
+        <Select value={orderBy} onValueChange={setOrderBy}>
           <SelectTrigger className="w-full sm:w-48">
             <SelectValue placeholder="Order by..." />
           </SelectTrigger>
@@ -304,11 +305,7 @@ export function BookList() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredBooks.map((book) => (
-            <BookItem
-              key={book.id}
-              book={book}
-              onDelete={handleDeleteBook}
-            >
+            <BookItem key={book.id} book={book} onDelete={handleDeleteBook}>
               <BookForm
                 book={book}
                 onSubmit={(data) => handleUpdateBook(book.id, data)}
