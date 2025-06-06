@@ -1,0 +1,41 @@
+docker/volumes/db/data
+docker/volumes/storage
+docker/test.http
+docker/docker-compose.override.yml
+
+# dependencies
+my-app/node_modules
+my-app/.pnp
+my-app/.pnp.*
+my-app/.yarn/*
+!my-app/.yarn/patches
+!my-app/.yarn/plugins
+!my-app/.yarn/releases
+!my-app/.yarn/versions
+
+# testing
+my-app/coverage
+
+# next.js
+my-app/.next/
+my-app/out/
+
+# production
+my-app/build
+
+# misc
+my-app/.DS_Store
+my-app/*.pem
+
+# debug
+my-app/npm-debug.log*
+my-app/yarn-debug.log*
+my-app/yarn-error.log*
+my-app/.pnpm-debug.log*
+
+# vercel
+my-app/.vercel
+
+# typescript
+my-app/*.tsbuildinfo
+my-app/next-env.d.ts

@@ -1,0 +1,68 @@
+-- Enable RLS (Row Level Security)
+ALTER TABLE auth.users ENABLE ROW LEVEL SECURITY;
+
+-- Create profiles table
+CREATE TABLE public.profiles (
+  id UUID REFERENCES auth.users ON DELETE CASCADE,
+  updated_at TIMESTAMP WITH TIME ZONE,
+  username TEXT UNIQUE,
+  full_name TEXT,
+  avatar_url TEXT,
+  website TEXT,
+
+  PRIMARY KEY (id),
+  CONSTRAINT username_length CHECK (char_length(username) >= 3)
+);
+
+-- Set up Row Level Security (RLS)
+ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Public profiles are viewable by everyone." ON public.profiles
+  FOR SELECT USING (true);
+
+CREATE POLICY "Users can insert their own profile." ON public.profiles
+  FOR INSERT WITH CHECK (auth.uid() = id);
+
+CREATE POLICY "Users can update own profile." ON public.profiles
+  FOR UPDATE USING (auth.uid() = id);
+
+-- Create books table
+CREATE TABLE public.books (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+  title TEXT NOT NULL,
+  author TEXT NOT NULL,
+  year INTEGER NOT NULL,
+  category TEXT NOT NULL,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL
+);
+
+-- Set up Row Level Security for books
+ALTER TABLE public.books ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can view their own books." ON public.books
+  FOR SELECT USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can insert their own books." ON public.books
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can update their own books." ON public.books
+  FOR UPDATE USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can delete their own books." ON public.books
+  FOR DELETE USING (auth.uid() = user_id);
+
+-- Function to automatically create a profile when a user signs up
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS trigger AS $$
+BEGIN
+  INSERT INTO public.profiles (id, full_name, avatar_url)
+  VALUES (new.id, new.raw_user_meta_data->>'full_name', new.raw_user_meta_data->>'avatar_url');
+  RETURN new;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Trigger to call the function when a new user is created
+CREATE TRIGGER on_auth_user_created
+  AFTER INSERT ON auth.users
+  FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();
