@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Search, LogOut } from "lucide-react";
+import { Search, LogOut, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { BookResponse, Book } from "@/models/book/bookModels";
 
@@ -22,6 +22,7 @@ import { ChangePassword } from "../auth/changePassword";
 import { ChangePasswordData } from "@/models/auth/authModels";
 
 import BookItem from "./bookItem";
+import CustomAlert from "../ui/custom-alert";
 
 /**
  * BookList component that displays a list of books with search, filter, and sorting functionalities.
@@ -35,6 +36,8 @@ export function BookList() {
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [orderBy, setOrderBy] = useState("none");
   const [successMessage, setSuccessMessage] = useState("");
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [bookIdToDelete, setBookIdToDelete] = useState<string | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -127,13 +130,9 @@ export function BookList() {
   };
 
   const handleDeleteBook = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this book?")) return;
-
     try {
       await deleteBook(id);
-
       setSuccessMessage("Book deleted successfully");
-
       loadBooks();
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -149,6 +148,9 @@ export function BookList() {
           variant: "destructive",
         });
       }
+    } finally {
+      setDeleteDialogOpen(false);
+      setBookIdToDelete(null);
     }
   };
 
@@ -236,6 +238,15 @@ export function BookList() {
 
   return (
     <div className="container mx-auto p-6">
+      {deleteDialogOpen && bookIdToDelete && (
+        <CustomAlert
+          message="Are you sure you want to delete the book?"
+          open={deleteDialogOpen}
+          setOpen={setDeleteDialogOpen}
+          onAccept={() => handleDeleteBook(bookIdToDelete)}
+        />
+      )}
+
       <div className="flex justify-between items-center mb-6 sm:flex-row flex-col gap-5">
         <h1 className="text-3xl font-bold">My books...</h1>
         <div className="flex :items-center gap-2 w-full sm:w-auto items-end sm:flex-row flex-col">
@@ -306,10 +317,22 @@ export function BookList() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredBooks.map((book) => (
             <BookItem key={book.id} book={book} onDelete={handleDeleteBook}>
-              <BookForm
-                book={book}
-                onSubmit={(data) => handleUpdateBook(book.id, data)}
-              />
+              <div className="flex space-x-2">
+                <BookForm
+                  book={book}
+                  onSubmit={(data) => handleUpdateBook(book.id, data)}
+                />
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setDeleteDialogOpen(true);
+                    setBookIdToDelete(book.id);
+                  }}
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </div>
             </BookItem>
           ))}
         </div>

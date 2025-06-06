@@ -1,8 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BookResponse } from "@/models/book/bookModels";
-import { Button } from "@/components/ui/button";
-import { Trash2 } from "lucide-react";
 
 /**
  * Item component for displaying a book with its details and actions.
@@ -11,7 +9,6 @@ import { Trash2 } from "lucide-react";
  */
 export default function BookItem({
   book,
-  onDelete,
   children,
 }: {
   book: BookResponse;
@@ -32,16 +29,7 @@ export default function BookItem({
       <CardContent>
         <div className="flex justify-between items-center">
           <span className="text-sm text-gray-500">Published: {book.year}</span>
-          <div className="flex space-x-2">
-            {children}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => onDelete(book.id)}
-            >
-              <Trash2 className="h-4 w-4" />
-            </Button>
-          </div>
+          { children}
         </div>
       </CardContent>
     </Card>

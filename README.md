@@ -24,6 +24,10 @@ A modern CRUD application for managing personal book collections, built with Nex
 - **Tools**: Docker, v0.dev (UI generation)
 - **Deployment**: Vercel
 
+## V0 Description
+
+To create the Next.js project, V0 was used as a starting point. The initial setup was based on [this conversation](https://v0.dev/chat/ZkdmkAQ9Wos), which provided a solid foundation. From there, the project was modified to address the specific requirements of the application.
+
 ## 📦 Project Structure
 
 ```plaintext
