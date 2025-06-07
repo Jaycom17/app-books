@@ -113,7 +113,7 @@ The container setup and Docker configuration are based on the Supabase self-host
 The .env file has been adjusted to disable email verification in the local environment, simplifying the registration process for development purposes.
 
 ```bash
-cd /docker
+cd docker
 docker-compose up -d
 ```
 
