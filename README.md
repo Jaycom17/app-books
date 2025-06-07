@@ -94,7 +94,7 @@ This structure makes the project scalable and maintainable by clearly separating
 1. **Clone the repository**
 
    ```bash
-   git git remote add origin https://github.com/Jaycom17/app-books.git
+   git clone https://github.com/Jaycom17/app-books.git
    cd app-books
    ```
 
